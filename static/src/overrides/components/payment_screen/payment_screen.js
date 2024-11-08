@@ -37,6 +37,7 @@ patch(PaymentScreen.prototype, {
 		if (paymentMethod?.id){
 			let payment_equipment = await this.orm.call("pos.payment.method", "get_equipment_info", [
 				[paymentMethod.id]]);
+			console.log("payment_equipment",payment_equipment);
 			equipmentRecord = payment_equipment
 		}
 		let timeoutId = false
