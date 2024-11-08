@@ -99,7 +99,7 @@ patch(PaymentScreen.prototype, {
             this.busService.addEventListener('notification', handlerTransactionCreation);
             timeoutId = setTimeout(() => {
                 this.validationState.block = false
-                alert('No se logro validar el pago')
+                // alert('No se logro validar el pago')
                 this.busService.removeEventListener('notification', handlerTransactionCreation);
             }, equipmentRecord.validation_delay * 1000)
 
