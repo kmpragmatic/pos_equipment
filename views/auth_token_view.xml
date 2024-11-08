@@ -1,0 +1,35 @@
+<odoo>
+    <record id="view_token_token_form" model="ir.ui.view">
+        <field name="name">token.token.form</field>
+        <field name="model">token.token</field>
+        <field name="arch" type="xml">
+            <form string="Auth token">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="auth_token"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_token_token_tree" model="ir.ui.view">
+        <field name="name">token.token.tree</field>
+        <field name="model">token.token</field>
+        <field name="arch" type="xml">
+            <tree string="Auth token">
+                <field name="name"/>
+                <!-- <field name="auth_token"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_token_token" model="ir.actions.act_window">
+        <field name="name">Token Config</field>
+        <field name="res_model">token.token</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- <menuitem id="menu_token_token_config" name="Token config" parent="point_of_sale.menu_point_config_product" action="action_token_token"/> -->
+</odoo>

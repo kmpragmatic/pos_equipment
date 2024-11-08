@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_method_view_form_extend" model="ir.ui.view">
+        <field name="name">payment_method.form.extend</field>
+        <field name="model">pos.payment.method</field>
+        <field name="inherit_id" ref="point_of_sale.pos_payment_method_view_form"/>
+        <field name="arch" type="xml">
+            <field name="is_online_payment" position="after">
+                <field name="pos_active" />
+                <field name="equipment_id" />
+            </field>
+
+        </field>
+    </record>
+
+</odoo>

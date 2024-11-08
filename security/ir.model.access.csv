@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_equipment,access_pos_equipment,model_pos_equipment,base.group_user,1,1,1,1
+access_pax_payment,access_pax_payment,model_pax_payment,base.group_user,1,1,1,1
+access_token_token,access_token_token,model_token_token,base.group_user,1,1,1,1
+
+access_pos_api_config,access_pos_api_config,model_pos_api_config,base.group_user,1,1,1,1
+access_pos_seriales,access_pos_seriales,model_pos_seriales,base.group_user,1,1,1,1
+access_transaction_response,access_transaction_response,model_transaction_response,base.group_user,1,1,1,1

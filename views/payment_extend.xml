@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="payment_view_form_extend" model="ir.ui.view">
+        <field name="name">payment.form.extend</field>
+        <field name="model">pax.payment</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="session_id" position="after">
+                <field name="pax_function" />
+                <field name="pax_payment_response" />
+                <field name="pax_payment_description" />
+                <field name="pax_auth_code" />
+                <field name="pax_operation_id" />
+                <field name="pax_commerce_code" />
+                <field name="pax_terminal_id" />
+                <field name="pax_ticket" />
+            </field>
+        </field>
+    </record>
+</odoo>

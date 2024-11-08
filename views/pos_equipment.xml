@@ -1,0 +1,54 @@
+<odoo>
+    <record id="view_pos_equipment_form" model="ir.ui.view">
+        <field name="name">pos.equipment.form</field>
+        <field name="model">pos.equipment</field>
+        <field name="arch" type="xml">
+            <form string="POS Equipment">
+
+                <header>
+                    <button name="send_notification" string="Enviar Token" type="object" class="oe_highlight"/>
+                    <button name="generate_service_token" string="Generar Billon Token" type="object" class="oe_highlight"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="product_id"/> 
+                            <!-- <field name="token_config_id"/>  -->
+                            <field name="pos_api_config_id"/> 
+                        </group>
+
+                        <group>
+                            <field name="serial_id"/>
+                            <!-- <field name="token"/> -->
+                            <field name="response"/>
+                        </group>
+                    </group>
+                   
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pos_equipment_tree" model="ir.ui.view">
+        <field name="name">pos.equipment.tree</field>
+        <field name="model">pos.equipment</field>
+        <field name="arch" type="xml">
+            <tree string="POS Equipment">
+                <field name="name"/>
+                <!-- <field name="product_id"/> -->
+                <field name="serial_id"/>
+                <!-- <field name="token"/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_pos_equipment" model="ir.actions.act_window">
+        <field name="name">POS Equipment</field>
+        <field name="res_model">pos.equipment</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_pos_equipment_config" name="POS Equipment" parent="point_of_sale.menu_point_config_product" action="action_pos_equipment"/>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_order_view_form_extend" model="ir.ui.view">
+        <field name="name">pos_order.form.extend</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']/group/group[2]" position="inside">
+                <field name="custom_order_uuid" />
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
