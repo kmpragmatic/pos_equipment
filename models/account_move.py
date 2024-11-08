@@ -4,7 +4,8 @@ import requests
 
 from odoo.exceptions import UserError
 
-
+import logging
+_logger = logging.getLogger(__name__)
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
@@ -46,6 +47,11 @@ class AccountMove(models.Model):
             'Content-Type': 'application/json',
         }
         cookies = request.httprequest.cookies
+        _logger.info("do_execute_receipt_invoice")
+        _logger.info(url)
+        _logger.info(payload)
+        _logger.info(headers)
+        _logger.info(cookies)
         response = requests.post(url, json=payload, headers=headers, cookies=cookies)
         if response.status_code == 200:
             response_data = response.json()
