@@ -2,34 +2,36 @@
 <templates id="template" xml:space="preserve">
   <t t-name="pos_equipment.PaymentScreen" t-inherit="point_of_sale.PaymentScreenButtons" t-inherit-mode="extension">
 		<xpath expr="//div[hasclass('payment-buttons')]" position="inside">
-			<button class="button send-api-button btn btn-light py-3 text-start rounded-0 border-bottom" 
-				t-on-click="() => this.sendRequestToDevice(currentOrder)">
-				<i class="fa fa-paper-plane me-2" role="img" title="Customer" />
-				<span>Enviar a dispositivo</span> 
+			<button class="button send-api-button btn btn-light py-3 text-start rounded-0 border-bottom"
+                    t-on-click="() => this.sendRequestToDevice(currentOrder)">
+				<i class="fa fa-paper-plane me-2" role="img" title="Customer"/>
+                <span>Enviar a dispositivo</span>
+			</button>
+            <button class="button send-api-button btn btn-light py-3 text-start rounded-0 border-bottom"
+                    t-on-click="() => this.getPaymentStatus(currentOrder)">
+				<i class="fa fa-money me-2" role="img" title="Consultar"/>
+                <span>Consultar Pago <t t="this.getCustom_uuid()"/> </span>
 			</button>
 		</xpath>
   </t>
-
-	<t t-name="pos_equipment.PaymentScreenValidate" t-inherit="point_of_sale.PaymentScreenValidate" t-inherit-mode="extension">
+    <t t-name="pos_equipment.PaymentScreenValidate" t-inherit="point_of_sale.PaymentScreenValidate"
+       t-inherit-mode="extension">
 		<xpath expr="//div[hasclass('validation')]" position="replace">
-			<div class="button next validation btn btn-primary btn-lg py-5 rounded-0 d-flex flex-column align-items-center justify-content-center fw-bolder" 
-						t-attf-class="{{currentOrder.is_paid() and currentOrder._isValidEmptyOrder() and !validationBlockState and !currentOrder._hasPaymentWithEquipment() ? 'highlight' : 'disabled'}}"
-						t-on-click="() => this.validateOrder()">
+			<div class="button next validation btn btn-primary btn-lg py-5 rounded-0 d-flex flex-column align-items-center justify-content-center fw-bolder"
+                 t-attf-class="{{currentOrder.is_paid() and currentOrder._isValidEmptyOrder() and !validationBlockState and !currentOrder._hasPaymentWithEquipment() ? 'highlight' : 'disabled'}}"
+                 t-on-click="() => this.validateOrder()">
 						<div class="pay-circle d-flex align-items-center justify-content-center mb-2">
-								<i class="oi oi-chevron-right" role="img" aria-label="Pay" title="Pay" />
+								<i class="oi oi-chevron-right" role="img" aria-label="Pay" title="Pay"/>
 						</div>
-						<span class="next_text">Validate</span>
+                <span class="next_text">Validate</span>
 				</div>
 		</xpath>
-
 	</t>
-
-	<t t-name="pos_equipment.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+    <t t-name="pos_equipment.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
 		<xpath expr="//div[@id='order-date']" position="before">
-			<div>Folio: <span t-if="props.data.folio" t-esc="props.data.folio" /> </div>
-			<img t-if="props.data.qr_receipt" style="width:250px;height:250px" t-att-src="props.data.qr_receipt" alt="svgCode"/>
+			<div>Folio: <span t-if="props.data.folio" t-esc="props.data.folio"/> </div>
+            <img t-if="props.data.qr_receipt" style="width:250px;height:250px" t-att-src="props.data.qr_receipt"
+                 alt="svgCode"/>
 		</xpath>
-
 	</t>
-
 </templates>

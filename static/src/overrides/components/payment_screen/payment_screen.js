@@ -23,6 +23,28 @@ patch(PaymentScreen.prototype, {
     get validationBlockState() {
         return this.validationState.block
     },
+    getCustom_uuid() {
+        return this.custom_uuid.uuid;
+    },
+    async getPaymentStatus(order) {
+        let current_uuid = this.custom_uuid.uuid;
+        let payment_equipment = await this.orm.call("pos.payment.method", "get_payment_uuid_info", [current_uuid]);
+        console.log('payment_equipment', payment_equipment);
+        let {code, uuid, response} = payment_equipment;
+        if (code === '0') {
+            if (uuid === current_uuid) {
+                await this.validateOrder()
+            } else {
+                alert('Se creo un respuesta de transaccion pero no coincide el UUID: ' + uuid + ' - Orden UUID: ' + current_uuid)
+            }
+
+        } else {
+            if (uuid === current_uuid) {
+                handleValidationOrder()
+                alert(`No se logro validar el pago, Codigo (${code}). Mensaje: ${response}`)
+            }
+        }
+    },
     async sendRequestToDevice(order) {
         let paymentLine = order.selected_paymentline
 
