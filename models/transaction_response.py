@@ -45,7 +45,8 @@ class TransactionResponse(models.Model):
     def create(self, vals):
         if self.env['transaction.response'].search([('response_uuid', '=', vals.get('response_uuid'))]):
             raise UserError('El valor UUID ya existe o no puede ser vacio')
-        
+        _logger.info("create event")
+        _logger.info(vals)
         res = super(TransactionResponse, self).create(vals)
         res._action_send_transaction_notification()
 
