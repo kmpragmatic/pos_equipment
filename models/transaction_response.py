@@ -2,7 +2,9 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError
 from datetime import datetime
 import uuid
+import logging
 
+_logger = logging.getLogger(__name__)
 
 from odoo.api import depends
 from odoo.exceptions import UserError
@@ -26,6 +28,10 @@ class TransactionResponse(models.Model):
     response_uuid = fields.Char(string="UUID", readonly=True, copy=False, default=None, required=True)
 
     def _action_send_transaction_notification(self):
+        _logger.info("bus event")
+        _logger.info(self.response_uuid)
+        _logger.info(self.code)
+        _logger.info(self.message)
         self.env['bus.bus']._sendone(
             self.env.user.partner_id,
             'transaction_response',
