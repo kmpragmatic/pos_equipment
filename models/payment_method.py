@@ -1,6 +1,7 @@
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-
+import logging
+_logger = logging.getLogger(__name__)
 class PosPaymentMethod(models.Model):
     _inherit = 'pos.payment.method'
 
@@ -29,27 +30,28 @@ class PosPaymentMethod(models.Model):
 
     @api.model
     def execute_request_receipt_create_model(self, order_reference):
-        for rec in self:
-            pos_order_id = self.env['pos.order'].search([('pos_reference', '=', order_reference[0] if isinstance(order_reference, list) else order_reference)])
-            if pos_order_id:
-                response = pos_order_id.account_move.do_execute_receipt_invoice()
-                if 'error' not in response and response['result']['status'] == 'success':
-                    num_folio =  response['result']['data'][0]['folio']
-                    num_uuid =  response['result']['data'][0]['uuid']
-                    qr_code =  response['result']['data'][0]['ted']
-                    pos_order_id.account_move.set_data_payment_request(num_folio, num_uuid)
-                    return {
-                        "num_folio": num_folio,
-                        "qr": qr_code,
-                        "status": "success"
-                    }
-                else:
-                    return response
-            else:
+        pos_order_id = self.env['pos.order'].search([('pos_reference', '=', order_reference[0] if isinstance(order_reference, list) else order_reference)])
+        if pos_order_id:
+            response = pos_order_id.account_move.do_execute_receipt_invoice()
+            _logger.info('execute_request_receipt_create_model-response')
+            _logger.info(response)
+            if 'error' not in response and response['result']['status'] == 'success':
+                num_folio =  response['result']['data'][0]['folio']
+                num_uuid =  response['result']['data'][0]['uuid']
+                qr_code =  response['result']['data'][0]['ted']
+                pos_order_id.account_move.set_data_payment_request(num_folio, num_uuid)
                 return {
+                    "num_folio": num_folio,
+                    "qr": qr_code,
+                    "status": "success"
+                }
+            else:
+                return response
+        else:
+            return {
                     "response": "No se encontro Pos Order",
                     "status": "error"
-                }
+            }
     
 
     def execute_request_receipt_create(self, order_reference):
