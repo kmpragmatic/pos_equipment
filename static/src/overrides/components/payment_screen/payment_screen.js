@@ -49,6 +49,7 @@ patch(PaymentScreen.prototype, {
 
         const handlerTransactionCreation = async ({detail: notifications}) => {
             debugger
+            console.log("notifications", notifications);
             for (const {payload, type} of notifications) {
                 if (type === "transaction_response") {
                     let {code, uuid, response} = payload
