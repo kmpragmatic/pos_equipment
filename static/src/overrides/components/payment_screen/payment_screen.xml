@@ -13,7 +13,7 @@
 	<t t-name="pos_equipment.PaymentScreenValidate" t-inherit="point_of_sale.PaymentScreenValidate" t-inherit-mode="extension">
 		<xpath expr="//div[hasclass('validation')]" position="replace">
 			<div class="button next validation btn btn-primary btn-lg py-5 rounded-0 d-flex flex-column align-items-center justify-content-center fw-bolder" 
-						t-attf-class="{{currentOrder.is_paid() and currentOrder._isValidEmptyOrder() and !validationBlockState ? 'highlight' : 'disabled'}}"
+						t-attf-class="{{currentOrder.is_paid() and currentOrder._isValidEmptyOrder() and !validationBlockState and !currentOrder._hasPaymentWithEquipment() ? 'highlight' : 'disabled'}}"
 						t-on-click="() => this.validateOrder()">
 						<div class="pay-circle d-flex align-items-center justify-content-center mb-2">
 								<i class="oi oi-chevron-right" role="img" aria-label="Pay" title="Pay" />

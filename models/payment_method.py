@@ -25,6 +25,8 @@ class PosPaymentMethod(models.Model):
                 'token': auth_token if auth_token else False,
                 'validation_delay': rec.equipment_id.pos_api_config_id.payment_delay_validation if rec.equipment_id else False
             }
+
+
     @api.model
     def execute_request_receipt_create_model(self, order_reference):
         for rec in self:
@@ -48,6 +50,7 @@ class PosPaymentMethod(models.Model):
                     "response": "No se encontro Pos Order",
                     "status": "error"
                 }
+    
 
     def execute_request_receipt_create(self, order_reference):
         for rec in self:
@@ -72,7 +75,14 @@ class PosPaymentMethod(models.Model):
                     "status": "error"
                 }
     
+class PosSession(models.Model):
+    _inherit = "pos.session"
 
+    def _loader_params_pos_payment_method(self):
+        res = super(PosSession, self)._loader_params_pos_payment_method()
+        res['search_params']['fields'].append('pos_active')
+        res['search_params']['fields'].append('equipment_id')
+        return res
 
 class PaxPayment(models.Model):
     _name = 'pax.payment'

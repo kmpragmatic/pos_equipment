@@ -1,16 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import logging
+import uuid
 from odoo import models, fields, api
-
-_logger = logging.getLogger(__name__)
 
 class PosOrder(models.Model):
     _inherit = 'pos.order'
 
     custom_order_uuid = fields.Char(string="UUID", readonly=True, copy=False, default=None)
-
-
 
     # @api.model
     # def create(self, vals):

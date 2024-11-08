@@ -3,6 +3,10 @@ from odoo.exceptions import UserError
 from datetime import datetime
 import uuid
 
+
+from odoo.api import depends
+from odoo.exceptions import UserError
+
 class TransactionResponse(models.Model):
     _name = 'transaction.response'
 
@@ -15,11 +19,29 @@ class TransactionResponse(models.Model):
         string='Venta vinculada',
         comodel_name='sale.order'
     )
+#    data_txt = fields.Char()
 
-    response_uuid = fields.Char(string="UUID", readonly=True, copy=False, default=None)
+#    data_txt = str(data)
 
-    @api.model
+    response_uuid = fields.Char(string="UUID", readonly=True, copy=False, default=None, required=True)
+
+    def _action_send_transaction_notification(self):
+        self.env['bus.bus']._sendone(
+            self.env.user.partner_id,
+            'transaction_response',
+            {
+                'code': self.code,
+                'uuid': self.response_uuid,
+                'response': self.message
+            },
+        )
+
     def create(self, vals):
-        vals['response_uuid'] = str(uuid.uuid4())
-        return super(TransactionResponse, self).create(vals)
+        if self.env['transaction.response'].search([('response_uuid', '=', vals.get('response_uuid'))]):
+            raise UserError('El valor UUID ya existe o no puede ser vacio')
+        
+        res = super(TransactionResponse, self).create(vals)
+        res._action_send_transaction_notification()
+
+        return res
 
