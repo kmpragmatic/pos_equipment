@@ -23,7 +23,7 @@ class TransactionResponse(models.Model):
         comodel_name='sale.order'
     )
 
-    response_uuid = fields.Char(string="UUID", readonly=True, copy=False, default=None, required=True)
+    response_uuid = fields.Char(string="UUID", copy=False, default=None, required=True)
 
     @api.model
     def get_payment_uuid_info(self, uuid):
