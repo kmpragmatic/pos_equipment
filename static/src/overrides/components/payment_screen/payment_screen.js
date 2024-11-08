@@ -28,7 +28,7 @@ patch(PaymentScreen.prototype, {
     },
     async getPaymentStatus(order) {
         let current_uuid = this.custom_uuid.uuid;
-        let payment_equipment = await this.orm.call("pos.payment.method", "get_payment_uuid_info", [current_uuid]);
+        let payment_equipment = await this.orm.call("transaction.response", "get_payment_uuid_info", [current_uuid]);
         console.log('payment_equipment', payment_equipment);
         let {code, uuid, response} = payment_equipment;
         if (code === '0') {
