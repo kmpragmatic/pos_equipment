@@ -4,6 +4,7 @@ import {patch} from "@web/core/utils/patch";
 import {PaymentScreen} from "@point_of_sale/app/screens/payment_screen/payment_screen";
 import {Order} from "@point_of_sale/app/store/models";
 import {onMounted} from "@odoo/owl";
+import { ConnectionLostError } from "@web/core/network/rpc_service";
 
 const {useState} = owl;
 
