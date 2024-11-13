@@ -10,7 +10,7 @@
             <button class="button send-api-button btn btn-light py-3 text-start rounded-0 border-bottom"
                     t-on-click="() => this.getPaymentStatus(currentOrder)">
 				<i class="fa fa-money me-2" role="img" title="Consultar"/>
-                <span>Consultar Pago</span>
+                <span>Consultar Pago <t t-esc="this.getCustom_uuid()"/> </span>
 			</button>
 		</xpath>
   </t>

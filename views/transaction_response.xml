@@ -7,11 +7,12 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name='name' />
+                            <field name='name' readonly="1"/>
                             <field name='code' />
-                            <field name='message' />
-                            <field name='provider' />
-                            <field name='sale_id' readonly="1"/>
+                            <field name='message' readonly="1"/>
+                            <field name='provider' readonly="1"/>
+			    <field name='sale_id' readonly="1"/>
+			    <field name='json_txt' readonpy="1" />
                             <field name='response_uuid'/>
                         </group>
                     </group>
